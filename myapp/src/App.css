@@ -1,38 +1,221 @@
-.App {
-  text-align: center;
+/* Added background animation */
+@keyframes backgroundShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#root{
+  background-color:black;
+  background-image: url("D:\intelhack\okay\public\videos\dl.beatsnoop.com-final-S6WMBeDrIk.jpg");
+  animation: backgroundShift 5s ease-in-out infinite;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  background: linear-gradient(120deg, #1b1b1b, #343a40, #212529);
+  background-size: 200% 200%;
+  background-image: url("D:\intelhack\okay\public\videos\dl.beatsnoop.com-final-S6WMBeDrIk.jpg");
+  background-color: rgba(255,255,255,0.6);
+  animation: backgroundShift 5s ease-in-out infinite;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Added subtle particle effect using pseudo-elements */
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 0;
+  animation: moveParticles 5s linear infinite;
+}
+
+@keyframes moveParticles {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 1000px 1000px;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Overlay effect on background video */
+#background-video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  object-fit: cover;
+  filter: brightness(0.3) blur(3px); /* Added blur effect */
+  opacity: 0.7; /* Added semi-transparency */
+}
+
+/* Other unchanged styles... */
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  background: linear-gradient(135deg, #343a40, #212529);
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  opacity: 0.95;
+}
+
+.productid, .drop, .desc {
+  margin: 10px;
+  width: 500px;
+  height: 40px;
+  background-color: #495057;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.productid:hover, .drop:hover, .desc:hover {
+  background-color: #adb5bd;
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.inner {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #1f1f1f;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+}
+
+.sub {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.sub:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  background-color: #121212;
+  color: #f8f9fa;
+  overflow: hidden;
+}
+
+.chat-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  height: 100vh;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #1f1f1f;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: scroll; /* Still enables scrolling */
+  background-color: #2b2b2b;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.messages::-webkit-scrollbar {
+  display: none;
+}
+.message {
+  margin: 10px 0;
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 80%;
+  word-wrap: break-word;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+
+
+.message:hover {
+  transform: scale(1.02);
+}
+
+.user {
+  background-color: #444;
+  color: #f8f9fa;
+  align-self: flex-start;
+  border-radius: 15px 15px 0px 15px;
+  margin-left: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ai {
+  background-color: #007bff;
   color: white;
+  align-self: flex-end;
+  border-radius: 15px 15px 15px 0px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.App-link {
-  color: #61dafb;
+.input-container {
+  display: flex;
+  padding: 15px;
+  border-top: 1px solid #343a40;
+  background-color: #1f1f1f;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.message-input {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 15px;
+  margin-right: 10px;
+  background-color: #343a40;
+  color: white;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.send-button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 15px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.send-button:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 123, 255, 0.4);
 }
